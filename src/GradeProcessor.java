@@ -1,35 +1,41 @@
-import java.util.ArrayList;
-import java.util.List;
 public class GradeProcessor {
-    public List<Integer>  failingGrades(List<Integer> grades) {
-        List<Integer> failing = new ArrayList<>();
+    public int[]  failingGrades(int[] grades) {
+        int count = 0;
         for (int grade : grades) {
             if (grade < 40) {
-                failing.add(grade);
+                count++;
+            }
+        }
+        int[] failing = new int[count];
+        int index = 0;
+        for (int grade : grades) {
+            if (grade < 40) {
+                failing[index] = grade;
+                index++;
             }
         }
         return failing;
     }
 
-    double averageGrade(List<Integer> grades) {
+    double averageGrade(int[] grades) {
         double sum = 0;
         for (int grade : grades) {
             sum += grade;
         }
-        return sum / grades.size();
+        return sum / grades.length;
     }
 
-    List<Integer> roundedGrades(List<Integer> grades) {
+    int[] roundedGrades(int[] grades) {
         Professor professor = new Professor();
         double sum = 0;
-        List<Integer> rounded = new ArrayList<>();
-        for (int grade : grades) {
-            rounded.add(professor.GradeRounding(grade));
+        int[] rounded = new int[grades.length];
+        for (int i = 0; i < grades.length; i++) {
+            rounded[i] = professor.GradeRounding(grades[i]);
         }
-       return rounded;
+        return rounded;
     }
 
-    int maxGrade(List<Integer> grades) {
+    int maxGrade(int[] grades) {
         int max = Integer.MIN_VALUE;
         grades = roundedGrades(grades);
         for (int grade : grades) {
